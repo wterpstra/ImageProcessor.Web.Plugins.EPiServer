@@ -1,0 +1,33 @@
+version: 1.0.0.{build}
+configuration: Release
+install:
+- ps: >-
+    choco install gitversion.portable -pre -y
+
+    nuget sources add -Name EPiServerFeed -Source http://nuget.episerver.com/feed/packages.svc/
+before_build:
+- ps: >-
+    nuget restore
+
+    gitversion /l console /output buildserver /updateAssemblyInfo
+build:
+  project: ImageProcessor.Web.Plugins.EPiServer.sln
+  verbosity: minimal
+after_build:
+- ps: >-
+    nuget pack ImageProcessor.Web.Plugins.EPiServer\ImageProcessor.Web.Plugins.EPiServer.csproj -version "$env:APPVEYOR_BUILD_VERSION"
+
+    appveyor PushArtifact "ImageProcessor.Web.Plugins.EPiServer.$env:APPVEYOR_BUILD_VERSION.nupkg"
+
+    7z a ImageProcessor.Web.Plugins.EPiServer.$env:APPVEYOR_BUILD_VERSION.zip $env:APPVEYOR_BUILD_FOLDER\ImageProcessor.Web.Plugins.EPiServer\bin\Release\ImageProcessor.Web.Plugins.EPiServer.dll
+
+    appveyor PushArtifact "ImageProcessor.Web.Plugins.EPiServer.$env:APPVEYOR_BUILD_VERSION.zip"
+deploy:
+- provider: Environment
+  name: MyGet
+  on:
+    branch: develop
+- provider: Environment
+  name: GitHub
+  on:
+    branch: master
