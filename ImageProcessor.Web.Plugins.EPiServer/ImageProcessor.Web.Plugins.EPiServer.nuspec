@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ImageProcessor.Web.Plugins.EPiServer</id>
+    <version>$version$</version>
+    <title>ImageProcessor.Web.Plugins.EPiServer</title>
+    <authors>Wessel Terpstra</authors>
+    <owners>wterpstra</owners>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/wterpstra/ImageProcessor.Web.Plugins.EPiServer</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/JimBobSquarePants/ImageProcessor/develop/build/icons/imageprocessor-logo-64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An ImageProcessor plugin to for loading images from the EPiServer ImageData blobs.</description>
+    <copyright>Copyright 2017</copyright>
+    <tags>EPiServer ImageProcessor ImageData Image Blob</tags>
+	<dependencies>
+	  <dependency id="EPiServer.Cms.Core" version="10.0.1" />
+	  <dependency id="ImageProcessor.Web" version="4.0.0" />
+	</dependencies>
+  </metadata>
+</package>
